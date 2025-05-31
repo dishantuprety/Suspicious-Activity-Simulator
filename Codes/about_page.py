@@ -1,0 +1,80 @@
+# about_page.py
+import customtkinter as ctk
+
+def create_about_page(parent):
+    # Create the About Us frame with a larger size
+    about_frame = ctk.CTkFrame(parent, fg_color="#2a2a2a", width=800, height=600)  # Increased frame size
+
+    # Create a scrollable canvas
+    canvas = ctk.CTkCanvas(about_frame, bg="#2a2a2a", highlightthickness=0)
+    scrollbar = ctk.CTkScrollbar(about_frame, orientation="vertical", command=canvas.yview)
+    scrollable_frame = ctk.CTkFrame(canvas, fg_color="#2a2a2a")
+
+    # Configure canvas
+    scrollable_frame.bind(
+        "<Configure>", 
+        lambda e: canvas.configure(scrollregion=canvas.bbox("all"))
+    )
+
+    canvas.create_window((0, 0), window=scrollable_frame, anchor="nw")
+    canvas.configure(yscrollcommand=scrollbar.set)
+
+    canvas.pack(side="left", fill="both", expand=True)
+    scrollbar.pack(side="right", fill="y")
+
+    # Enable mouse wheel scrolling
+    def on_mouse_wheel(event):
+        canvas.yview_scroll(-1 * int(event.delta / 120), "units")
+
+    canvas.bind_all("<MouseWheel>", on_mouse_wheel)
+
+    # Title Label - Increased size and aligned to the left
+    title_label = ctk.CTkLabel(
+        scrollable_frame, 
+        text="About Us!", 
+        font=("Arial", 70, "bold"),  # Increased size for the title
+        text_color="white",
+        justify="left",  # Align text to the left
+        anchor="w"  # Align the label to the left edge
+    )
+    title_label.pack(pady=10, anchor="w")  # Ensure title is left-aligned with padding
+
+    # About Us content text
+    about_text = (
+        "Welcome to the Suspicious Activity Simulator!\n\n"
+        "The Suspicious Activity Simulator is a cutting-edge tool designed to assist in the detection "
+        "and analysis of suspicious activities in real-time. Powered by advanced machine learning algorithms, "
+        "this application is ideal for security professionals, law enforcement agencies, and anyone working in surveillance. "
+        "Our goal is to provide a robust solution that makes it easier to identify potential threats and improve security measures.\n\n"
+        "Features:\n"
+        "- Live Feed Monitoring: Monitor live security footage for any suspicious activities in real-time.\n"
+        "- Recorded Footage Analysis: Review previously recorded footage and detect any anomalies or unusual behavior patterns.\n"
+        "- Suspicious Activity Detection: Use machine learning models to automatically flag potential threats based on behavior patterns.\n"
+        "- User-Friendly Interface: Simple, intuitive design that makes the application easy to use for both beginners and experts.\n\n"
+        "Our Mission:\n"
+        "We strive to make security systems smarter by integrating AI and machine learning technologies into surveillance tools. "
+        "By helping users identify threats more accurately, we aim to reduce response times and increase the overall safety of individuals and businesses.\n\n"
+        "For more information, inquiries, or feedback, please reach out to us at:\n"
+        "- Email: support@yourapp.com\n"
+        "- Website: www.yourapp.com\n\n"
+        "Thank you for using our app! Stay safe and secure."
+    )
+
+    # Adjust the wraplength dynamically based on screen size
+    def update_wraplength(event):
+        about_label.configure(wraplength=event.width - 40)  # Subtract padding for better wrapping
+
+    about_label = ctk.CTkLabel(
+        scrollable_frame, 
+        text=about_text,
+        font=("Arial", 20),  # Text size for the description
+        text_color="white",
+        justify="left",  # Justify text to the left for better readability
+        anchor="w"  # Align text to the left edge of the widget
+    )
+    about_label.pack(expand=True, padx=20, pady=20)
+
+    # Bind to parent resizing event
+    canvas.bind("<Configure>", update_wraplength)
+    
+    return about_frame
