@@ -1,6 +1,6 @@
-System Requirements
+### System Requirements
 
-Hardware Requirements
+## Hardware Requirements
 Component	Specification
 Processor	Intel Core i5/i7 (Quad-core or higher)
 RAM	Minimum 8 GB
@@ -9,47 +9,47 @@ GPU	NVIDIA GTX 1650 or higher (optional but recommended)
 Camera	HD Webcam or CCTV (720p or higher)
 Power	Stable power supply for uninterrupted processing
                     
-Software Requirements
+## Software Requirements
 Component	Details
 Operating System	Windows 10/11
 Programming Language	Python 3.x
 Python IDE	VS Code / PyCharm
                     
-Libraries & Dependencies
+### Libraries & Dependencies
                     
-Machine Learning / Deep Learning
+## Machine Learning / Deep Learning
 
 TensorFlow / Keras – For model training and violence classification
 Scikit-learn – For metrics, preprocessing, and evaluations
 PyTorch (Optional) – Alternate model implementation
 
-Computer Vision & Processing
+## Computer Vision & Processing
 
 OpenCV – For video capture, processing, and human detection
 YOLOv2 (optional, if integrated) – For object detection
 SSD MobileNet V2 COCO – For human detection (pretrained model)
 
-Data Handling & Visualization
+## Data Handling & Visualization
 
 NumPy – For array operations
 Pandas – For data handling
 Matplotlib / Seaborn – For visualizing training results
 
-Security
+## Security
 
 bcrypt – For password hashing during login/signup
 sqlite3 or MySQL – For user credentials and activity logs
 
-GUI & UX
+## GUI & UX
 
 CustomTkinter – For the modern GUI interface
 
-Alerts & Notifications
+## Alerts & Notifications
 
 requests – For Telegram API integration
 Telegram Bot – For sending real-time alerts (requires Bot Token & Chat ID)
 
-Development Tools
+## Development Tools
 Tool	Purpose
 VS Code / PyCharm	Code development
 SQLite Browser	View & test database (optional)
@@ -57,7 +57,7 @@ GitHub	Version control & documentation
 Telegram App	Receive real-time alerts
 Google Colab / Jupyter Notebook (Optional)	Training and testing models
         
-Pretrained & Custom Models
+## Pretrained & Custom Models
 Model	Purpose
 ssd_mobilenet_v2_coco_2018_03_29	Pretrained human detection model
 modelnew.h5	Custom-trained violence detection model (CNN-based)
