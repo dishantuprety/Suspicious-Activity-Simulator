@@ -1,1 +1,5 @@
+Due to file size limitations and repository constraints, I am unable to upload all the trained models directly to this GitHub repository, however I have provided the custom trained modelnew.h5 in the "Models" folder. However, below is the list of models used in this project:
 
+->modelnew.h5 – A custom-trained Convolutional Neural Network (CNN) model used for real-time violence detection.
+->ssd_mobilenet_v2_coco_2018_03_29 – A pre-trained deep learning model used for efficient human detection, trained on the COCO dataset.
+->YOLOv2 (optional) – Explored for object detection tasks to evaluate real-time performance and accuracy.
