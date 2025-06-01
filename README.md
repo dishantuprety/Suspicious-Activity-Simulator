@@ -104,3 +104,8 @@ For model access or queries:
 Email: `dishantuprety@gmail.com`
 
 ---
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
+
