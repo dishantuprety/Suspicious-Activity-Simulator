@@ -2,8 +2,8 @@ import requests
 import os
 
 # Telegram Bot Credentials
-TELEGRAM_BOT_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN", "7670503928:AAE04UrPL64gm1o_IL0RJpJTOsfL_1zDBoE")  # Set this in environment variables
-TELEGRAM_CHAT_ID =-1002490809823 # Group chat ID
+TELEGRAM_BOT_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN", "**************************************")  # Set this in environment variables
+TELEGRAM_CHAT_ID =-************** # Group chat ID
 
 def send_telegram_alert():
     """
