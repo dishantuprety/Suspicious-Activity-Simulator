@@ -1,3 +1,13 @@
-In this file I explain in brief the codes that are in the folder
+In this file I explain in brief the codes that are in the folder.
 
+"""setup_database
+This Python script sets up a local SQLite database by defining a function called initialize_database, which creates a table named users if it doesn't already exist. It begins by importing the sqlite3 module and establishing a connection to a database file called users.db. Using a cursor object, it executes a SQL command to create the users table with five columns: id (a unique, auto-incremented identifier), username (a unique and mandatory text field), password (to store the hashed password securely), security_question, and security_answer (both required for account recovery). After executing the SQL command, the function commits the changes to the database and closes the connection. This setup is typically used in authentication systems to manage user credentials securely.
+"""
+
+"""encrypt
+This script defines two functions that use the bcrypt library to securely handle user passwords. The hash_password function takes a plain text password, generates a cryptographic salt, and hashes the password using bcrypt.hashpw(). The resulting hashed password is returned in byte format, which is recommended for secure storage in databases. The second function, verify_password, is used to authenticate users by comparing a plain text password to a previously stored hashed version. It does this by encoding the plain password and checking it against the stored hash using bcrypt.checkpw(). These functions are essential for creating a secure login system that protects user credentials from being exposed or misused.
+"""
+
+"""user.db
+The users.db file is a SQLite database used to securely store user authentication details for the Suspicious Activity Simulator application. It contains a table named users, which holds records for each registered user, including fields like id (a unique, auto-incrementing identifier), username (which must be unique), password (stored as a securely hashed value using bcrypt), and both a security_question and security_answer for password recovery purposes. This database allows the application to verify user credentials during login, enforce account uniqueness, and enable secure access control, making it a critical component of the system’s authentication mechanism.
 """
