@@ -1,1 +1,67 @@
+import numpy as np
+import tensorflow as tf
+import cv2
+
+# Disable eager execution (for TensorFlow 2.x compatibility)
+tf.compat.v1.disable_eager_execution()
+
+class SimpleDetector:
+    _session = None  # Shared session to avoid multiple initializations
+
+    def __init__(self, model_path=None):
+        """Initialize the human detection model."""
+        if model_path is None:
+            model_path = r"C:\Users\user\OneDrive\Desktop\FinalYearProject\ssd_mobilenet_v2_coco_2018_03_29\frozen_inference_graph.pb"
+
+        self.graph = tf.compat.v1.Graph()
+        with self.graph.as_default():
+            graph_def = tf.compat.v1.GraphDef()
+            with tf.compat.v2.io.gfile.GFile(model_path, 'rb') as file:
+                graph_def.ParseFromString(file.read())
+                tf.import_graph_def(graph_def, name='')
+
+        if SimpleDetector._session is None:
+            SimpleDetector._session = tf.compat.v1.Session(graph=self.graph)
+
+        self.sess = SimpleDetector._session
+
+        # Get input and output tensors
+        self.image_tensor = self.graph.get_tensor_by_name('image_tensor:0')
+        self.boxes = self.graph.get_tensor_by_name('detection_boxes:0')
+        self.scores = self.graph.get_tensor_by_name('detection_scores:0')
+        self.classes = self.graph.get_tensor_by_name('detection_classes:0')
+        self.num = self.graph.get_tensor_by_name('num_detections:0')
+
+    def detect_humans(self, image, threshold=0.5):
+        """Detect humans in the given image."""
+        image_expanded = np.expand_dims(image, axis=0)
+        (boxes, scores, classes, num) = self.sess.run(
+            [self.boxes, self.scores, self.classes, self.num],
+            feed_dict={self.image_tensor: image_expanded}
+        )
+        return boxes[0], scores[0], classes[0].astype(int), int(num)
+
+def draw_boxes(image, boxes, scores, classes, threshold=0.5):
+    """Draw bounding boxes for detected humans."""
+    height, width, _ = image.shape
+    human_detected = False
+
+    for i in range(len(scores)):
+        if scores[i] > threshold and classes[i] == 1:  # Class 1 is 'person'
+            human_detected = True
+            y_min, x_min, y_max, x_max = boxes[i]
+            
+            (x_min, y_min, x_max, y_max) = (round(x_min * width), round(y_min * height),
+                                            round(x_max * width), round(y_max * height))
+
+            cv2.rectangle(image, (x_min, y_min), (x_max, y_max), (255, 0, 0), 2)
+            label = f"Person: {scores[i]:.2f}"
+            cv2.putText(image, label, (x_min, max(y_min - 10, 20)),
+                        cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 0, 0), 2)
+    
+    return image, human_detected
+
+if __name__ == "__main__":
+    print("Human detection module loaded.")
+
 
