@@ -1,4 +1,4 @@
-In this file I explain in brief the codes that are in the folder.
+In this file I will explain in brief the codes that are in the folder.
 
 """setup_database
 This Python script sets up a local SQLite database by defining a function called initialize_database, which creates a table named users if it doesn't already exist. It begins by importing the sqlite3 module and establishing a connection to a database file called users.db. Using a cursor object, it executes a SQL command to create the users table with five columns: id (a unique, auto-incremented identifier), username (a unique and mandatory text field), password (to store the hashed password securely), security_question, and security_answer (both required for account recovery). After executing the SQL command, the function commits the changes to the database and closes the connection. This setup is typically used in authentication systems to manage user credentials securely.
